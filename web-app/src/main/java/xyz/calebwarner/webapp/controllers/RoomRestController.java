@@ -1,10 +1,10 @@
-package xyz.calebwarner.vertafore_goal.controllers;
+package xyz.calebwarner.webapp.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.calebwarner.vertafore_goal.models.Room;
-import xyz.calebwarner.vertafore_goal.services.RoomService;
+import xyz.calebwarner.webapp.models.Room;
+import xyz.calebwarner.webapp.services.RoomService;
 
 import java.util.List;
 

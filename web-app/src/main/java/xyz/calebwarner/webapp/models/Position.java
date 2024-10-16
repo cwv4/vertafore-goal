@@ -1,4 +1,4 @@
-package xyz.calebwarner.vertafore_goal.models;
+package xyz.calebwarner.webapp.models;
 
 public enum Position {
     CONCIERGE, FRONT_DESK, HOUSEKEEPING, SECURITY;

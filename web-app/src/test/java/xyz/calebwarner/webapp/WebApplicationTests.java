@@ -1,10 +1,10 @@
-package xyz.calebwarner.vertafore_goal;
+package xyz.calebwarner.webapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VertaforeGoalApplicationTests {
+class WebApplicationTests {
 
 	@Test
 	void contextLoads() {

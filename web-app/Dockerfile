@@ -5,7 +5,7 @@ COPY pom.xml /build/
 COPY src /build/src/
 
 RUN mvn clean package
-COPY target/vertafore-goal-${VERSION}.jar target/application.jar
+COPY target/webapp-${VERSION}.jar target/application.jar
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app/

@@ -1,15 +1,15 @@
-package xyz.calebwarner.vertafore_goal.models;
+package xyz.calebwarner.webapp.models;
 
 public class Staff {
     private String id;
     private String firstName;
     private String lastName;
-    private Position position;
+    private xyz.calebwarner.webapp.models.Position position;
 
     public Staff() {
     }
 
-    public Staff(String id, String firstName, String lastName, Position position) {
+    public Staff(String id, String firstName, String lastName, xyz.calebwarner.webapp.models.Position position) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,11 +40,11 @@ public class Staff {
         this.lastName = lastName;
     }
 
-    public Position getPosition() {
+    public xyz.calebwarner.webapp.models.Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(xyz.calebwarner.webapp.models.Position position) {
         this.position = position;
     }
 }

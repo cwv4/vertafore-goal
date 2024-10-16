@@ -1,7 +1,7 @@
-package xyz.calebwarner.vertafore_goal.services;
+package xyz.calebwarner.webapp.services;
 
 import org.springframework.stereotype.Service;
-import xyz.calebwarner.vertafore_goal.models.Room;
+import xyz.calebwarner.webapp.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;

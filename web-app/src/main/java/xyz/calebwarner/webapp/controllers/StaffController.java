@@ -1,10 +1,10 @@
-package xyz.calebwarner.vertafore_goal.controllers;
+package xyz.calebwarner.webapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xyz.calebwarner.vertafore_goal.services.StaffService;
+import xyz.calebwarner.webapp.services.StaffService;
 
 @Controller
 @RequestMapping("/staff")

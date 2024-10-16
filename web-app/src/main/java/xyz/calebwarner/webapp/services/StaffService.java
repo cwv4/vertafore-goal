@@ -1,8 +1,8 @@
-package xyz.calebwarner.vertafore_goal.services;
+package xyz.calebwarner.webapp.services;
 
 import org.springframework.stereotype.Service;
-import xyz.calebwarner.vertafore_goal.models.Position;
-import xyz.calebwarner.vertafore_goal.models.Staff;
+import xyz.calebwarner.webapp.models.Position;
+import xyz.calebwarner.webapp.models.Staff;
 
 import java.util.ArrayList;
 import java.util.List;

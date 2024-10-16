@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>xyz.calebwarner</groupId>
-	<artifactId>web-app</artifactId>
+	<artifactId>webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>web-app</name>
+	<name>webapp</name>
 	<description>Goal Project for Vertafore</description>
 	<url/>
 	<licenses>
