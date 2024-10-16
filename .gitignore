@@ -1,8 +1,8 @@
 HELP.md
-target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+temp/
+*.log
+target/
 
 ### STS ###
 .apt_generated
@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+shelf/
+workspace.xml
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Personal docs ###
+workflow.txt
