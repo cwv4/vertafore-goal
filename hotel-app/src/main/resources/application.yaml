@@ -11,3 +11,7 @@ spring:
       on-profile: test
 server:
   port: 9000
+---
+# Default port:
+server:
+  port: 8000

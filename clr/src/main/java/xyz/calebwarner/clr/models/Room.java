@@ -1,4 +1,4 @@
-package xyz.calebwarner.hotelapp.models;
+package xyz.calebwarner.clr.models;
 
 public class Room {
     private long id;
