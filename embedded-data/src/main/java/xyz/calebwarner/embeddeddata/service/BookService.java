@@ -23,7 +23,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void saveDefaultBooks() {
+    public List<Book> saveDefaultBooks() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("Book A", "George Nelson", BigDecimal.valueOf(9.99), LocalDate.of(2023, 8, 31)));
         books.add(new Book("Book B", "Bryan Cooper", BigDecimal.valueOf(19.99), LocalDate.of(2023, 7, 31)));
@@ -31,13 +31,15 @@ public class BookService {
         books.add(new Book("Book D", "Daniel Fisher", BigDecimal.valueOf(39.99), LocalDate.of(2023, 5, 5)));
 
         bookRepository.saveAll(books);
+
+        return books;
     }
 
-    public void testBookClass() {
-        saveDefaultBooks();
+    public List<Book> testBookClass() {
+        List<Book> books = saveDefaultBooks();
 
         LOG.info("--------------------------------------------");
-        LOG.info("findAll(), expecting 4 books:");
+        LOG.info("findAll():");
         for (Book book : bookRepository.findAll()) {
             LOG.info("{}", book);
         }
@@ -46,29 +48,23 @@ public class BookService {
         Optional<Book> optionalBook = bookRepository.findById(1L);
         optionalBook.ifPresent(obj -> {
             LOG.info("--------------------------------------------");
-            LOG.info("Book found with findById(1L):");
+            LOG.info("findById(1L):");
             LOG.info(obj.toString());
             LOG.info("");
         });
 
         LOG.info("--------------------------------------------");
-        LOG.info("Book found with findByTitle('Book B')");
+        LOG.info("findByTitle('Book B')");
         bookRepository.findByTitle("Book B").forEach(b -> {
             LOG.info(b.toString());
             LOG.info("");
         });
 
         LOG.info("--------------------------------------------");
-        bookRepository.deleteById(2L);
-        LOG.info("Book delete where ID = 2L");
-        for (Book book : bookRepository.findAll()) {
-            LOG.info("{}", book);
-        }
-        LOG.info("");
-
-        LOG.info("--------------------------------------------");
-        bookRepository.save(new Book("Book E", "Evelyn Tucker", BigDecimal.valueOf(39.99), LocalDate.of(2023, 10, 5)));
-        LOG.info("Added book with title: 'Book E'");
+        Book bookE = new Book("Book E", "Evelyn Tucker", BigDecimal.valueOf(39.99), LocalDate.of(2023, 10, 5));
+        books.add(bookE);
+        bookRepository.save(bookE);
+        LOG.info("save(Book E):");
         for (Book book : bookRepository.findAll()) {
             LOG.info("{}", book);
         }
@@ -81,5 +77,7 @@ public class BookService {
             LOG.info("{}", book);
         }
         LOG.info("");
+
+        return books;
     }
 }
