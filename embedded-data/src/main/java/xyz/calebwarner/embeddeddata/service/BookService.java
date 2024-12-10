@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import xyz.calebwarner.embeddeddata.data.BookRepository;
 import xyz.calebwarner.embeddeddata.model.Book;
+import xyz.calebwarner.embeddeddata.model.Genre;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,10 +26,10 @@ public class BookService {
 
     public List<Book> saveDefaultBooks() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("Book A", "George Nelson", BigDecimal.valueOf(9.99), LocalDate.of(2023, 8, 31)));
-        books.add(new Book("Book B", "Bryan Cooper", BigDecimal.valueOf(19.99), LocalDate.of(2023, 7, 31)));
-        books.add(new Book("Book C", "Cody Kenny", BigDecimal.valueOf(29.99), LocalDate.of(2023, 6, 10)));
-        books.add(new Book("Book D", "Daniel Fisher", BigDecimal.valueOf(39.99), LocalDate.of(2023, 5, 5)));
+        books.add(new Book("Book A", "George Nelson", BigDecimal.valueOf(9.99), LocalDate.of(2023, 8, 31), Genre.FICTION));
+        books.add(new Book("Book B", "Bryan Cooper", BigDecimal.valueOf(19.99), LocalDate.of(2023, 7, 31), Genre.FANTASY));
+        books.add(new Book("Book C", "Cody Kenny", BigDecimal.valueOf(29.99), LocalDate.of(2023, 6, 10), Genre.NONFICTION));
+        books.add(new Book("Book D", "Daniel Fisher", BigDecimal.valueOf(39.99), LocalDate.of(2023, 5, 5), Genre.THRILLER));
 
         bookRepository.saveAll(books);
 
@@ -61,7 +62,7 @@ public class BookService {
         });
 
         LOG.info("--------------------------------------------");
-        Book bookE = new Book("Book E", "Evelyn Tucker", BigDecimal.valueOf(39.99), LocalDate.of(2023, 10, 5));
+        Book bookE = new Book("Book E", "Evelyn Tucker", BigDecimal.valueOf(39.99), LocalDate.of(2023, 10, 5), Genre.SCIENCE_FICTION);
         books.add(bookE);
         bookRepository.save(bookE);
         LOG.info("save(Book E):");
@@ -77,6 +78,13 @@ public class BookService {
             LOG.info("{}", book);
         }
         LOG.info("");
+
+        LOG.info("--------------------------------------------");
+        LOG.info("findByGenre('Fiction')");
+        bookRepository.findByGenre(Genre.FICTION).forEach(b -> {
+            LOG.info(b.toString());
+            LOG.info("");
+        });
 
         return books;
     }
