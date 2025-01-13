@@ -9,9 +9,20 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic odometerTopic() {
-        return TopicBuilder.name("messageTopic")
+    public NewTopic stringTopic() {
+        return TopicBuilder.name("stringTopic")
                 .build();
     }
 
+    @Bean
+    public NewTopic userTopic() {
+        return TopicBuilder.name("userTopic")
+                .build();
+    }
+
+    @Bean
+    public NewTopic orderTopic() {
+        return TopicBuilder.name("orderTopic")
+                .build();
+    }
 }
