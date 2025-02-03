@@ -9,7 +9,4 @@ public class AspectOrientedAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AspectOrientedAppApplication.class, args);
     }
-
-
-
 }
