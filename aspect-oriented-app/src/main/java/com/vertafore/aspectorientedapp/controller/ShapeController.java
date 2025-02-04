@@ -28,4 +28,14 @@ public class ShapeController {
         DecimalFormat df = new DecimalFormat("#.##");
         return "A circle with radius " + radius + "m would have an area of: " + df.format(service.getCircleArea(radius)) + "m";
     }
+
+    @GetMapping("/triangle/{name}")
+    public String handleTriangle(@PathVariable String name) {
+        return "Your triangle's string is: " + service.getTriangle(name);
+    }
+
+    @GetMapping("/hexagon/{name}")
+    public String handleHexagon(@PathVariable String name) {
+        return "Your hexagon's string is: " + service.getHexagon(name);
+    }
 }
