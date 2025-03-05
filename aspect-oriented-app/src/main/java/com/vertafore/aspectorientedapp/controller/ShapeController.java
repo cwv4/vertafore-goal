@@ -1,5 +1,6 @@
 package com.vertafore.aspectorientedapp.controller;
 
+import com.vertafore.aspectorientedapp.aspect.Profilable;
 import com.vertafore.aspectorientedapp.service.ShapeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,22 +19,26 @@ public class ShapeController {
         this.service = service;
     }
 
+    @Profilable
     @GetMapping("/square/{length}")
     public String handleSquare(@PathVariable int length) {
         return "A square with length " + length + "m would have an area of: " + service.getSquareArea(length) + "m";
     }
 
+    @Profilable
     @GetMapping("/circle/{radius}")
     public String handleCircle(@PathVariable int radius) {
         DecimalFormat df = new DecimalFormat("#.##");
         return "A circle with radius " + radius + "m would have an area of: " + df.format(service.getCircleArea(radius)) + "m";
     }
 
+    @Profilable
     @GetMapping("/triangle/{name}")
     public String handleTriangle(@PathVariable String name) {
         return "Your triangle's string is: " + service.getTriangle(name);
     }
 
+    @Profilable
     @GetMapping("/hexagon/{name}")
     public String handleHexagon(@PathVariable String name) {
         return "Your hexagon's string is: " + service.getHexagon(name);
