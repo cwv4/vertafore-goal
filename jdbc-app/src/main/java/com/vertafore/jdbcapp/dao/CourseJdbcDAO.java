@@ -1,0 +1,45 @@
+package com.vertafore.jdbcapp.dao;
+
+import com.vertafore.jdbcapp.model.Course;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class CourseJdbcDAO implements  DAO<Course> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CourseJdbcDAO.class);
+    private JdbcTemplate jdbcTemplate;
+
+    public CourseJdbcDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Course> list() {
+        return List.of();
+    }
+
+    @Override
+    public void create(Course course) {
+
+    }
+
+    @Override
+    public Optional<Course> get(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void update(Course course, int id) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+}
