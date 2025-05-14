@@ -4,15 +4,26 @@ import com.vertafore.jdbcapp.model.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class CourseJdbcDAO implements  DAO<Course> {
 
     private static final Logger LOG = LoggerFactory.getLogger(CourseJdbcDAO.class);
     private JdbcTemplate jdbcTemplate;
+
+    RowMapper<Course> rowMapper = (rs, rowNum) -> {
+        Course course = new Course();
+        course.setCourseId(rs.getInt("course_id"));
+        course.setTitle(rs.getString("title"));
+        course.setDescription(rs.getString("description"));
+        course.setLink(rs.getString("link"));
+        return course;
+    };
 
     public CourseJdbcDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -20,7 +31,8 @@ public class CourseJdbcDAO implements  DAO<Course> {
 
     @Override
     public List<Course> list() {
-        return List.of();
+        String sql = "SELECT course_id, title, description, link FROM course";
+        return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
