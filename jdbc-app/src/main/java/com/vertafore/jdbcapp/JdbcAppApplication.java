@@ -19,6 +19,23 @@ public class JdbcAppApplication {
 
         System.out.println("\nAll Courses ------------------------------------");
         dao.list().forEach(System.out::println);
+
+        System.out.println("\nOne Course ------------------------------------");
+        System.out.println(dao.get(1));
+
+        System.out.println("\nCreated Course ------------------------------------");
+        Course createdCourse = new Course("Course Title", "A description of a new course", "A good link");
+        dao.create(createdCourse);
+        System.out.println(dao.get(6));
+
+        System.out.println("\nUpdated Course ------------------------------------");
+        Course updatedCourse = new Course("Changed", "Changed", "Changed");
+        dao.update(updatedCourse, 2);
+        System.out.println(dao.get(2));
+
+        System.out.println("\nDeleted Course ------------------------------------");
+        dao.delete(3);
+        System.out.println(dao.get(3));
     }
 
 }

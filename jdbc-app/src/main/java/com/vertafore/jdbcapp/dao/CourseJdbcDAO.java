@@ -3,6 +3,7 @@ package com.vertafore.jdbcapp.dao;
 import com.vertafore.jdbcapp.model.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -37,21 +38,33 @@ public class CourseJdbcDAO implements  DAO<Course> {
 
     @Override
     public void create(Course course) {
-
+        String sql = "INSERT INTO course (title, description, link) VALUES (?,?,?)";
+        jdbcTemplate.update(sql, course.getTitle(), course.getDescription(), course.getLink());
     }
 
     @Override
     public Optional<Course> get(int id) {
-        return Optional.empty();
+        String sql = "SELECT course_id, title, description, link FROM course WHERE course_id = ?";
+        Course course = null;
+
+        try {
+            course = jdbcTemplate.queryForObject(sql, rowMapper, id);
+        } catch (DataAccessException dae) {
+            LOG.info("Course not found for id [{}]", id);
+        }
+
+        return Optional.ofNullable(course);
     }
 
     @Override
     public void update(Course course, int id) {
-
+        String sql = "UPDATE course SET title = ?, description = ?, link = ? WHERE course_id = ?";
+        jdbcTemplate.update(sql, course.getTitle(), course.getDescription(), course.getLink(), id);
     }
 
     @Override
     public void delete(int id) {
-
+        String sql = "DELETE FROM course WHERE course_id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }
