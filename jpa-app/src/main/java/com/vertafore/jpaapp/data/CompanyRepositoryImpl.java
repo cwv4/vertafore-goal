@@ -2,9 +2,11 @@ package com.vertafore.jpaapp.data;
 
 import com.vertafore.jpaapp.model.Company;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -35,5 +37,12 @@ public class CompanyRepositoryImpl implements CompanyRepository {
         } else {
             entityManager.remove(entityManager.merge(company));
         }
+    }
+
+    @Override
+    public List<Company> getCompaniesByState(String state) {
+        TypedQuery<Company> jpqlQuery = entityManager.createQuery("SELECT e FROM Company as e WHERE e.state = :state", Company.class);
+        jpqlQuery.setParameter("state", state);
+        return jpqlQuery.getResultList();
     }
 }

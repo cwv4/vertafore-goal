@@ -2,9 +2,13 @@ package com.vertafore.jpaapp.data;
 
 import com.vertafore.jpaapp.model.Salary;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -35,5 +39,16 @@ public class SalaryRepositoryImpl implements SalaryRepository {
         } else {
             entityManager.remove(entityManager.merge(salary));
         }
+    }
+
+    @Override
+    public List<Salary> getSalariesWithLevelGreaterThan(int level) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Salary> criteriaQuery = criteriaBuilder.createQuery(Salary.class);
+        Root<Salary> salaryRoot = criteriaQuery.from(Salary.class);
+
+        return entityManager.createQuery(criteriaQuery.select(salaryRoot)
+                .where(criteriaBuilder.greaterThan(salaryRoot.get("level"), level)))
+                .getResultList();
     }
 }

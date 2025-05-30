@@ -40,7 +40,6 @@ public class JpaAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(JpaAppApplication.class, args);
 
-
         Employee employee1 = new Employee("Bob", "Smith", 20, new ArrayList<>());
         Employee employee2 = new Employee("George", "Miller", 3, new ArrayList<>());
         employee1 = employeeRepository.save(employee1).get();
@@ -71,5 +70,11 @@ public class JpaAppApplication {
 
         EmployeeProfile employeeProfile = new EmployeeProfile("gmill", "1a2b3c", "gmill89@email.net", "George Guy", employee2);
         employeeProfileRepository.save(employeeProfile);
+
+        log.info("Companies from JPQL Query:");
+        companyRepository.getCompaniesByState("IN").forEach(company1 -> log.info("Company: {}", company1));
+
+        log.info("Salaries from Criteria API:");
+        salaryRepository.getSalariesWithLevelGreaterThan(3).forEach(salary1 -> log.info("Salary: {}", salary1));
     }
 }
