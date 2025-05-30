@@ -19,12 +19,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     @Transactional
     public Optional<Employee> save(Employee employee) {
-        if (employee.getId() == null) {
-            entityManager.persist(employee);
-            return Optional.of(employee);
-        } else {
-            return Optional.of(entityManager.merge(employee));
-        }
+        return Optional.of(entityManager.merge(employee));
     }
 
     @Override

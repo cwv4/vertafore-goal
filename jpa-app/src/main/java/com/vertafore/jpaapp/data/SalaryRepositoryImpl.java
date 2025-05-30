@@ -19,12 +19,7 @@ public class SalaryRepositoryImpl implements SalaryRepository {
     @Override
     @Transactional
     public Optional<Salary> save(Salary salary) {
-        if (salary.getId() == null) {
-            entityManager.persist(salary);
-            return Optional.of(salary);
-        } else {
-            return Optional.of(entityManager.merge(salary));
-        }
+        return Optional.of(entityManager.merge(salary));
     }
 
     @Override

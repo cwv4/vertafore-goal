@@ -2,17 +2,27 @@ package com.vertafore.jpaapp.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "salaries")
-@Data @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@ToString(exclude = "employee")
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Salary {
 
     @Id
@@ -20,7 +30,9 @@ public class Salary {
     @Column(name = "salary_id")
     private Long id;
 
-    private String company;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Employee employee;
+
     private Integer level;
     private Integer bonusPercentage;
     private Double startingSalary;
@@ -28,8 +40,8 @@ public class Salary {
     private Boolean activeFlag;
     private String title;
 
-    public Salary(String company, Integer level, Integer bonusPercentage, Double startingSalary, Double currentSalary, Boolean activeFlag, String title) {
-        this.company = company;
+    public Salary(Employee employee, Integer level, Integer bonusPercentage, Double startingSalary, Double currentSalary, Boolean activeFlag, String title) {
+        this.employee = employee;
         this.level = level;
         this.bonusPercentage = bonusPercentage;
         this.startingSalary = startingSalary;

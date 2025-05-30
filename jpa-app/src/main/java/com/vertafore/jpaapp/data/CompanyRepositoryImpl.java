@@ -18,12 +18,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
     @Override
     @Transactional
     public Optional<Company> save(Company company) {
-        if (company.getId() == null) {
-            entityManager.persist(company);
-            return Optional.of(company);
-        } else {
-            return Optional.of(entityManager.merge(company));
-        }
+        return Optional.of(entityManager.merge(company));
     }
 
     @Override
