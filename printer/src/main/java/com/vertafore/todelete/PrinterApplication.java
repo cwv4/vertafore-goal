@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 
 @SpringBootApplication
 public class PrinterApplication {
@@ -30,7 +31,7 @@ public class PrinterApplication {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             message.write(baos);
-            String result = baos.toString("UTF-8");
+            String result = baos.toString(StandardCharsets.UTF_8);
             System.out.println("----------String Content via Streaming Output----------");
             System.out.println(result);
             System.out.println("-------------------------------------------------------");
