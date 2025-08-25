@@ -1,13 +1,14 @@
-package com.vertafore.todelete;
+package com.vertafore.mockito;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PrinterApplicationTests {
+class MockitoApplicationTests {
 
     @Test
     void contextLoads() {
+        // Test
     }
 
 }

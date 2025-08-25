@@ -12,7 +12,7 @@
     <context:property-placeholder location="classpath:application.properties"/>
 
     <!-- Define MyPrinter bean -->
-    <bean id="myPrinter" class="com.vertafore.todelete.model.MyPrinter">
+    <bean id="myPrinter" class="com.vertafore.printer.model.MyPrinter">
         <property name="message1" value="${printer.message1}"/>
         <property name="message2" value="${printer.message2}"/>
     </bean>

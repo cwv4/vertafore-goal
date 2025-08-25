@@ -35,7 +35,7 @@
  *     included in the source code are owned exclusively by Vertafore, Inc.
  */
 
-package com.vertafore.todelete.model;
+package com.vertafore.printer.model;
 
 import jakarta.ws.rs.core.StreamingOutput;
 

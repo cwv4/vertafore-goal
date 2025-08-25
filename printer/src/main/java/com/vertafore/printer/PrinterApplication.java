@@ -1,6 +1,6 @@
-package com.vertafore.todelete;
+package com.vertafore.printer;
 
-import com.vertafore.todelete.model.MyPrinter;
+import com.vertafore.printer.model.MyPrinter;
 import jakarta.ws.rs.core.StreamingOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
