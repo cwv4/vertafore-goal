@@ -1,42 +1,6 @@
-/*
- *  Copyright 2025 Vertafore, Inc.   All rights reserved.
- *
- *  Disclaimers:
- *   This software is provided "as is," without warranty of any kind, express or
- *   implied, including but not limited to the warranties of merchantability,
- *   fitness for a particular purpose and non-infringement.  This source code
- *   should not be relied upon as the sole basis for solving a problem whose
- *   incorrect solution could result in injury to person or property. In no
- *   event shall the author or contributors be held liable for any damages
- *   arising in any way from the use of this software. The entire risk as to the
- *   results and performance of this source code is assumed by the user.
- *
- *   Permission is granted to use this software for internal use only, subject
- *   to the following restrictions:
- *     1.  This source code MUST retain the above copyright notice, disclaimer,
- *         and this list of conditions.
- *     2.  This source code may be used ONLY within the scope of the original
- *         agreement under which this source code was provided and may not be
- *         distributed to any third party without the express written consent of
- *         Vertafore, Inc.
- *     3.  This source code along with all obligations and rights under the
- *         original License Agreement may not be assigned to any third party
- *         without the expressed written consent of Vertafore, Inc., except that
- *         assignment may be made to a  successor to the business or
- *         substantially all of its assets. All parties bind their successors,
- *         executors, administrators, and assignees to all covenants of this
- *         Agreement.
- *
- *   All advertising materials mentioning features or use of this software must
- *   display the following acknowledgment:
- *
- *     Trademark Disclaimer:
- *     All patent, copyright, trademark and other intellectual property rights
- *     included in the source code are owned exclusively by Vertafore, Inc.
- */
-
 package com.vertafore.email.service;
 
+import com.vertafore.email.model.EmailOption;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
@@ -48,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -55,10 +20,13 @@ import java.util.List;
 public class EmailService {
 
     @Value("${smtp.sender.email}")
-    String mailSender;
+    String senderEmail;
+
+    @Value("${sender.name}")
+    String senderName;
 
     @Value("${smtp.recipient}")
-    String mailRecipient;
+    String recipientEmail;
 
     private final JavaMailSender emailSender;
 
@@ -69,42 +37,52 @@ public class EmailService {
             
             Yay!<br><br>
             
-            Your truly
+            Yours truly
             """;
 
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 
+    public void sendMessage(EmailOption option) throws MessagingException, UnsupportedEncodingException {
+        switch (option) {
+            case SIMPLE_MESSAGE -> sendSimpleMessage();
+            case MIME_MESSAGE -> sendMimeMessage();
+            case MIME_MESSAGE_WITH_ATTACHMENTS -> sendMimeMessageWithAttachments();
+        }
+    }
+
     public void sendSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(mailSender);
-        message.setTo(mailRecipient);
+        message.setFrom(senderEmail);
+        message.setTo(recipientEmail);
         message.setSubject("This is a test");
         message.setText(BODY);
         emailSender.send(message);
     }
 
-    public void sendMimeMessage() throws MessagingException {
+    public void sendMimeMessage() throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         mimeMessage.setContent(BODY, "text/html");
 
-        mimeMessage.setRecipient(Message.RecipientType.TO, InternetAddress.parse(mailRecipient)[0]);
+        mimeMessage.setRecipient(Message.RecipientType.TO, InternetAddress.parse(recipientEmail)[0]);
         mimeMessage.setSubject("This is a mime test");
-        mimeMessage.setFrom(mailSender);
+        InternetAddress sender = new InternetAddress(senderEmail, senderName);
+        mimeMessage.setFrom(sender);
         emailSender.send(mimeMessage);
     }
 
-    public void sendMimeMessageWithAttachments() throws MessagingException {
+    public void sendMimeMessageWithAttachments() throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, StandardCharsets.UTF_8.name());
 
         helper.setText(BODY, true);
         mimeMessage.setHeader("MessageStream", "outbound");
 
-        helper.setTo(mailRecipient);
+        helper.setTo(recipientEmail);
         helper.setSubject("This is a mime test");
-        helper.setFrom(mailSender);
+        InternetAddress sender = new InternetAddress(senderEmail, senderName);
+        helper.setFrom(sender);
 
         List<File> files = getFiles();
         int i = 1;
