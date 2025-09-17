@@ -5,7 +5,12 @@
         <action name="hello"
                 class="com.vertafore.struts.action.HelloWorldAction"
                 method="execute">
-            <result name="SUCCESS">/results.jsp</result>
+            <result name="SUCCESS">/hello-results.jsp</result>
+        </action>
+        <action name="distance"
+                class="com.vertafore.struts.action.DistanceAnalyzerAction"
+                method="execute">
+            <result name="SUCCESS">/distance-results.jsp</result>
         </action>
     </package>
 </struts>
