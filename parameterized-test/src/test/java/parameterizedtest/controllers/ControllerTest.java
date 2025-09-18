@@ -14,7 +14,7 @@ import java.util.List;
 
 class ControllerTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "option={0}, input={1}, expected={2}")
     @CsvSource(value = {
             "Alternating|a,b,c,d,e,f|[a, d, b, e, c, f]",
             "Descending|a,b,c,d,e,f|[f, e, d, c, b, a]",
